@@ -1,0 +1,39 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container">
+    <div class="title">
+        <h4>Listado de Actividades</h4>
+        <button type="button" class="btn btn-primary" routerLink="add">Añadir Actividad</button>
+    </div>
+    
+    <table *ngIf="listActividades.length>0" class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">nameActividad</th>
+            <th scope="col">idTicketActividad</th>
+            <th scope="col">pagado</th>
+
+            <!--<th scope="col">Created At</th>
+            <th scope="col">Update At</th> -->
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listActividades" class="table-active">
+            <td>{{item.name}}</td>
+            <td>{{item.nameActividad}}</td>
+            <td>{{item.idTicketActividad}}</td>
+            <td>{{item.pagado}}</td>
+
+            <!-- <td>{{item.createdAt}}</td>
+            <td>{{item.updatedAt}}</td> -->
+            <td>
+                <button routerLink="edit/{{item?._id}}" type="button" class="btn btn-info btn-sm">Edit</button>
+                <button (click)="deleteActividad(item._id!)" type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 *ngIf="listActividades.length==0">No hay actividades para mostrar</h5>
+</div>
+

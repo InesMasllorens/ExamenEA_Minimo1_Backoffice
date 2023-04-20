@@ -1,0 +1,30 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-1">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{operacion}} ticket</div>
+            <div class="card-body">
+                <form [formGroup]="formTicket" (ngSubmit)="addTicket()">
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese nombre">
+                    <span *ngIf="formTicket.get('nombre')?.hasError('required') && formTicket.get('nombre')?.touched">
+                        El campo nombre es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="location" type="text" class="form-control mt-2" placeholder="Ingrese localización">
+                    <span *ngIf="formTicket.get('location')?.hasError('required') && formTicket.get('location')?.touched">
+                        El campo localización es <strong>requerido</strong>
+                    </span>
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button (click)="goBack()" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="formTicket.invalid" type="submit" class="btn btn-primary">{{operacion}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

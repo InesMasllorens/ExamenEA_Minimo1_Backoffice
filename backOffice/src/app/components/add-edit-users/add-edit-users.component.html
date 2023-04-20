@@ -1,0 +1,38 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-1">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{operacion}} user</div>
+            <div class="card-body">
+                <form [formGroup]="formUsers" (ngSubmit)="addUser()">
+                    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre">
+                    <span *ngIf="formUsers.get('name')?.hasError('required') && formUsers.get('name')?.touched">
+                        El campo nombre es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="surname" type="text" class="form-control mt-2" placeholder="Ingrese surname">
+                    <span *ngIf="formUsers.get('surname')?.hasError('required') && formUsers.get('surname')?.touched">
+                        El campo apellido es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="email" type="email" class="form-control mt-2" placeholder="Ingrese email">
+                    <span *ngIf="formUsers.get('email')?.hasError('required') && formUsers.get('email')?.touched">
+                        El campo email es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="password" type="text" class="form-control mt-2" placeholder="Ingrese password">
+                    <span *ngIf="formUsers.get('password')?.hasError('required') && formUsers.get('password')?.touched">
+                        El campo password es <strong>requerido</strong>
+                    </span>
+                
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button (click)="goBack()" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="formUsers.invalid" type="submit" class="btn btn-primary">{{operacion}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

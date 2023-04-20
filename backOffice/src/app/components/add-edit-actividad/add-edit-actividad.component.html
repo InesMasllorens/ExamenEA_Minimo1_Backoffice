@@ -1,0 +1,38 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-1">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{operacion}} actividad</div>
+            <div class="card-body">
+                <form [formGroup]="formActividad" (ngSubmit)="addActividad()">
+                    <input formControlName="name" type="text" class="form-control mt-2" placeholder="Ingrese nombre">
+                    <span *ngIf="formActividad.get('name')?.hasError('required') && formActividad.get('name')?.touched">
+                        El campo nombre es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="nameActividad" type="text" class="form-control mt-2" placeholder="Ingrese el nombre de la actividad">
+                    <span *ngIf="formActividad.get('nameActividad')?.hasError('required') && formActividad.get('nameActividad')?.touched">
+                        El campo nombreActividad es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="idTicketActividad" type="text" class="form-control mt-2" placeholder="Ingrese el id del ticket al que quieres acceder">
+                    <span *ngIf="formActividad.get('idTicketActividad')?.hasError('required') && formActividad.get('idTicketActividad')?.touched">
+                        El campo idTicketActividad es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="pagado" type="text" class="form-control mt-2" placeholder="Escribe SI si has pagado ya este tiquet, escribe NO si no lo has pagado">
+                    <span *ngIf="formActividad.get('pagado')?.hasError('required') && formActividad.get('pagado')?.touched">
+                        El campo pagado es <strong>requerido</strong>
+                    </span>
+                
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button (click)="goBack()" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="formActividad.invalid" type="submit" class="btn btn-primary">{{operacion}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container">
+  <div class="title">
+    <h4>Listado de Tickets</h4>
+    <button type="button" class="btn btn-primary" routerLink="/ticket/add">Añadir Ticket</button>
+  </div>
+
+  <table *ngIf="listTickets.length>0" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Productos</th>
+        <th scope="col">Location</th>
+        <!--<th scope="col">Created At</th>
+            <th scope="col">Update At</th> -->
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listTickets" class="table-active">
+        <td>{{item.nombre}}</td>
+        <td>
+          <button routerLink="/ticket/{{item?._id}}/productos" type="button"
+            class="btn btn-link">{{item.productos.length}}</button>
+        </td>
+        <td>{{item.location}}</td>
+        <!-- <td>{{item.createdAt}}</td>
+            <td>{{item.updatedAt}}</td> -->
+        <td>
+          <button routerLink="/ticket/edit/{{item?._id}}" type="button" class="btn btn-info btn-sm">Edit</button>
+          <button (click)="deleteTicket(item._id!)" type="button" class="btn btn-secondary btn-sm ms-2">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 *ngIf="listTickets.length==0">No hay tickets para mostrar</h5>
+</div>
